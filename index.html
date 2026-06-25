@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Stephan Taljaard — Contact Centre & AI Solutions Architect based in Prague. Specialising in Genesys Cloud, GCP, LLM/AI integration, and CCaaS transformation." />
+  <title>Stephan Taljaard — Contact Centre & AI Solutions Architect</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #0A0F1E;
+      --navy-2:  #0D1529;
+      --navy-3:  #111C36;
+      --teal:    #00C9B1;
+      --teal-dim:#00a896;
+      --amber:   #F5A623;
+      --white:   #F0F4FF;
+      --grey:    #8A96B4;
+      --grey-2:  #1A2540;
+      --grey-3:  #232F4B;
+      --card-bg: #0F1A30;
+      --border:  rgba(0,201,177,0.15);
+      --radius:  12px;
+      --transition: 0.25s ease;
+      --font-head: 'Space Grotesk', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: var(--font-head);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      canvas { display: none !important; }
+    }
+
+    /* ─── Scrollbar ────────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: var(--teal-dim); border-radius: 3px; }
+
+    /* ─── Utility ──────────────────────────────────────────────────── */
+    .container { width: min(1140px, 100% - 3rem); margin-inline: auto; }
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: var(--teal);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+    }
+    .section-title span { color: var(--teal); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-family: var(--font-head);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      border: none;
+      transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+    }
+    .btn:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
+    .btn-primary {
+      background: var(--teal);
+      color: var(--navy);
+    }
+    .btn-primary:hover { background: #00e8cc; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,201,177,0.35); }
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1.5px solid rgba(240,244,255,0.3);
+    }
+    .btn-outline:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-2px); }
+    .btn-amber {
+      background: var(--amber);
+      color: var(--navy);
+    }
+    .btn-amber:hover { background: #fbb940; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,166,35,0.35); }
+
+    /* ─── Nav ──────────────────────────────────────────────────────── */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      transition: background var(--transition), box-shadow var(--transition);
+    }
+    #nav.scrolled {
+      background: rgba(10,15,30,0.92);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+    .nav-logo {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav-logo span { color: var(--teal); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--grey);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color var(--transition);
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--teal); }
+
+    .nav-cta { margin-left: 1rem; }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: var(--navy-2);
+      padding: 1.5rem;
+      gap: 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: var(--grey);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color var(--transition);
+    }
+    .mobile-menu a:hover { color: var(--teal); }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ─── Hero ─────────────────────────────────────────────────────── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 7rem 0 5rem;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--teal);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 32px; height: 1px;
+      background: var(--teal);
+    }
+    .hero-name {
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .hero-name .accent { color: var(--teal); }
+    .hero-title {
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      font-weight: 500;
+      color: var(--grey);
+      margin-bottom: 1.5rem;
+    }
+    .hero-tagline {
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      font-weight: 600;
+      color: var(--white);
+      max-width: 600px;
+      line-height: 1.4;
+      margin-bottom: 2.5rem;
+    }
+    .hero-tagline em {
+      font-style: normal;
+      color: var(--amber);
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; }
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--grey);
+      font-size: 0.7rem;
+      font-family: var(--font-mono);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+    .hero-scroll svg { width: 20px; height: 20px; }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ─── Services ─────────────────────────────────────────────────── */
+    #services { padding: 6rem 0; }
+    .services-header { margin-bottom: 3rem; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .service-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+    .service-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(0,201,177,0.4);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,201,177,0.1);
+    }
+    .service-icon {
+      width: 52px; height: 52px;
+      background: rgba(0,201,177,0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+      transition: background var(--transition);
+    }
+    .service-card:hover .service-icon { background: rgba(0,201,177,0.18); }
+    .service-icon svg { width: 26px; height: 26px; stroke: var(--teal); fill: none; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+    .service-card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.75rem; }
+    .service-card p { font-size: 0.9rem; color: var(--grey); line-height: 1.65; }
+
+    /* ─── Projects ─────────────────────────────────────────────────── */
+    #projects { padding: 6rem 0; background: var(--navy-2); }
+    .projects-header { margin-bottom: 3rem; }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+    .project-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(0,201,177,0.4);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,201,177,0.1);
+    }
+    .project-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+    .project-type {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--amber);
+      background: rgba(245,166,35,0.1);
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .project-card h3 { font-size: 1.05rem; font-weight: 600; }
+    .project-card p { font-size: 0.875rem; color: var(--grey); flex: 1; line-height: 1.65; }
+    .project-outcome {
+      font-size: 0.85rem;
+      color: var(--teal);
+      font-weight: 500;
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .project-outcome::before { content: '→ '; }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--teal);
+      background: rgba(0,201,177,0.08);
+      border: 1px solid rgba(0,201,177,0.2);
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+    }
+
+    /* ─── About ────────────────────────────────────────────────────── */
+    #about { padding: 6rem 0; }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    @media (max-width: 860px) { .about-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+    .about-bio p {
+      color: var(--grey);
+      font-size: 0.975rem;
+      line-height: 1.75;
+      margin-bottom: 1.25rem;
+    }
+    .about-bio p:last-child { margin-bottom: 0; }
+    .about-bio strong { color: var(--white); font-weight: 600; }
+    .about-stats {
+      display: flex;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+    .stat { }
+    .stat-number {
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: var(--teal);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .stat-label { font-size: 0.8rem; color: var(--grey); font-weight: 500; }
+
+    .about-sidebar h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 2.5rem;
+    }
+    .tech-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.85rem 0.65rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      font-family: var(--font-mono);
+      color: var(--grey);
+      text-align: center;
+      transition: border-color var(--transition), color var(--transition);
+    }
+    .tech-item:hover { border-color: rgba(0,201,177,0.4); color: var(--white); }
+    .tech-item svg { width: 28px; height: 28px; }
+    .tech-item img { width: 28px; height: 28px; object-fit: contain; filter: brightness(0.8) saturate(0.5); transition: filter var(--transition); }
+    .tech-item:hover img { filter: brightness(1) saturate(1); }
+
+    .cert-list { list-style: none; }
+    .cert-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.875rem;
+      color: var(--grey);
+    }
+    .cert-list li:last-child { border-bottom: none; }
+    .cert-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--teal);
+      flex-shrink: 0;
+    }
+
+    /* ─── Contact ──────────────────────────────────────────────────── */
+    #contact {
+      padding: 6rem 0;
+      background: var(--navy-2);
+      text-align: center;
+    }
+    .contact-inner { max-width: 620px; margin-inline: auto; }
+    .contact-inner .section-title { margin-bottom: 1rem; }
+    .contact-inner p {
+      color: var(--grey);
+      font-size: 1rem;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+    .contact-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; }
+    .contact-meta {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .contact-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--grey);
+      font-size: 0.875rem;
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .contact-meta-item:hover { color: var(--teal); }
+    .contact-meta-item svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ─── Footer ───────────────────────────────────────────────────── */
+    footer {
+      background: var(--navy);
+      border-top: 1px solid var(--border);
+      padding: 1.75rem 0;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-inner p { font-size: 0.8rem; color: var(--grey); }
+    .footer-inner a { color: var(--teal); text-decoration: none; }
+    .footer-mono { font-family: var(--font-mono); font-size: 0.75rem; color: var(--grey-3 ); }
+
+    /* ─── Section divider line ─────────────────────────────────────── */
+    .divider-line {
+      width: 48px; height: 3px;
+      background: linear-gradient(90deg, var(--teal), transparent);
+      border-radius: 2px;
+      margin: 1rem 0 2.5rem;
+    }
+
+    /* ─── Glow accent ──────────────────────────────────────────────── */
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════ NAV ════════════════════════════════════ -->
+<nav id="nav" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">ST<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="https://www.linkedin.com/in/[YOUR_LINKEDIN_HANDLE]" target="_blank" rel="noopener noreferrer" class="btn btn-primary nav-cta" style="padding: 0.55rem 1.1rem; font-size: 0.85rem;">
+        <!-- LinkedIn icon -->
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        Connect
+      </a>
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" role="menu">
+    <a href="#services" role="menuitem">Services</a>
+    <a href="#projects" role="menuitem">Projects</a>
+    <a href="#about" role="menuitem">About</a>
+    <a href="#contact" role="menuitem">Contact</a>
+    <a href="https://www.linkedin.com/in/[YOUR_LINKEDIN_HANDLE]" target="_blank" rel="noopener noreferrer" role="menuitem" style="color: var(--teal);">Connect on LinkedIn ↗</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════ HERO ═══════════════════════════════════ -->
+<section id="hero" aria-label="Introduction">
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+
+  <!-- Glow orbs -->
+  <div class="glow-orb" style="width:500px;height:500px;background:rgba(0,201,177,0.06);top:-100px;right:-100px;"></div>
+  <div class="glow-orb" style="width:350px;height:350px;background:rgba(245,166,35,0.04);bottom:100px;left:-50px;"></div>
+
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Available for consulting engagements</div>
+      <h1 class="hero-name">Stephan<br><span class="accent">Taljaard</span></h1>
+      <p class="hero-title">Contact Centre &amp; AI Solutions Architect &nbsp;·&nbsp; Prague, Czech Republic</p>
+      <p class="hero-tagline">
+        Transforming contact centres through <em>intelligent architecture</em> —
+        from Genesys Cloud deployments to production-grade AI voice systems.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          View My Work
+        </a>
+        <a href="https://www.linkedin.com/in/[YOUR_LINKEDIN_HANDLE]" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          Connect on LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    Scroll
+  </div>
+</section>
+
+<!-- ═══════════════════════ SERVICES ═══════════════════════════════ -->
+<section id="services" aria-labelledby="services-title">
+  <div class="container">
+    <div class="services-header">
+      <p class="section-label">What I Do</p>
+      <h2 class="section-title" id="services-title">Services &amp; <span>Expertise</span></h2>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="services-grid">
+
+      <article class="service-card">
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <h3>Genesys Cloud Architecture &amp; Implementation</h3>
+        <p>End-to-end design and deployment of Genesys Cloud CX platforms — from greenfield builds and complex migrations to IVR optimisation, routing strategy, and ACD configuration. Delivered for enterprise-scale contact centres across multiple industries.</p>
+      </article>
+
+      <article class="service-card">
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        </div>
+        <h3>AI &amp; LLM Integration</h3>
+        <p>Production-grade AI voice bots, intelligent chatbots, and RAG pipelines that integrate seamlessly with CCaaS platforms. Experience building with Claude API, ElevenLabs TTS, and Vertex AI — from architecture through to deployment and monitoring.</p>
+      </article>
+
+      <article class="service-card">
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+        </div>
+        <h3>Google Cloud Platform (GCP) Solutions</h3>
+        <p>Designing and deploying cloud-native architectures on GCP — including CCAI (Dialogflow CX, Agent Assist), BigQuery analytics pipelines, Pub/Sub event streaming, and Cloud Run deployments for contact centre workloads.</p>
+      </article>
+
+      <article class="service-card">
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Workforce Management (WFM) Consulting</h3>
+        <p>Strategic WFM advisory covering forecasting models, scheduling optimisation, and adherence frameworks. Hands-on experience configuring Genesys WFM and integrating third-party WFM platforms to reduce overstaffing and improve service levels.</p>
+      </article>
+
+      <article class="service-card">
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 8h2v5H7zM11 8h2v2h-2zM15 8h2v5h-2z"/></svg>
+        </div>
+        <h3>CCaaS Automation &amp; n8n Workflow Design</h3>
+        <p>Building scalable automation workflows with n8n — connecting CRM systems, ticketing platforms, telephony APIs, and AI services into cohesive, event-driven pipelines. From lead enrichment and sales prospecting to post-call follow-up automation.</p>
+      </article>
+
+      <article class="service-card">
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <h3>Contact Centre Analytics &amp; Speech Mining</h3>
+        <p>Unlocking insight from voice data using platforms like Genesys SpeechMiner and interaction analytics tooling. Design of custom dashboards, agent performance frameworks, and quality scoring models that drive measurable CX improvement.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ PROJECTS ═══════════════════════════════ -->
+<section id="projects" aria-labelledby="projects-title">
+  <div class="container">
+    <div class="projects-header">
+      <p class="section-label">Portfolio</p>
+      <h2 class="section-title" id="projects-title">Featured <span>Projects</span></h2>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="projects-grid">
+
+      <article class="project-card">
+        <div class="project-header">
+          <h3>Genesys Cloud Platform Migration</h3>
+          <span class="project-type">Telecom Enterprise</span>
+        </div>
+        <p>Led end-to-end migration of a 1,200-seat contact centre from legacy Avaya infrastructure to Genesys Cloud CX. Designed call routing architecture, re-platformed IVR flows, and trained a team of 8 local administrators post-go-live.</p>
+        <div class="tags">
+          <span class="tag">#GenesysCloud</span>
+          <span class="tag">#CCaaS</span>
+          <span class="tag">#IVR</span>
+          <span class="tag">#Avaya</span>
+          <span class="tag">#WFM</span>
+        </div>
+        <p class="project-outcome">Reduced average handle time by 18% and cut routing errors by 95% post-migration.</p>
+      </article>
+
+      <article class="project-card">
+        <div class="project-header">
+          <h3>AI Voice Bot with ElevenLabs &amp; Claude</h3>
+          <span class="project-type">Financial Services</span>
+        </div>
+        <p>Architected and deployed a conversational AI voice bot for inbound customer authentication and FAQ resolution. Stack: Claude API for NLU and intent handling, ElevenLabs for natural TTS, Genesys Cloud for telephony integration via AudioHook.</p>
+        <div class="tags">
+          <span class="tag">#ClaudeAPI</span>
+          <span class="tag">#ElevenLabs</span>
+          <span class="tag">#AudioHook</span>
+          <span class="tag">#GenesysCloud</span>
+          <span class="tag">#RAG</span>
+        </div>
+        <p class="project-outcome">Automated 34% of inbound call volume; CSAT maintained at 4.6/5 for bot-handled interactions.</p>
+      </article>
+
+      <article class="project-card">
+        <div class="project-header">
+          <h3>SpeechMiner Analytics Deployment</h3>
+          <span class="project-type">Insurance Provider</span>
+        </div>
+        <p>Deployed and configured Genesys SpeechMiner across a 400-seat contact centre. Built custom topic categories, agent scorecards, and executive dashboards surfacing compliance risk, DSAT signals, and coaching opportunities in near real-time.</p>
+        <div class="tags">
+          <span class="tag">#SpeechMiner</span>
+          <span class="tag">#GenesysCloud</span>
+          <span class="tag">#Analytics</span>
+          <span class="tag">#QA</span>
+          <span class="tag">#Compliance</span>
+        </div>
+        <p class="project-outcome">QA team efficiency improved 3× through automated scoring; compliance incidents down 60%.</p>
+      </article>
+
+      <article class="project-card">
+        <div class="project-header">
+          <h3>n8n Sales Prospecting Automation</h3>
+          <span class="project-type">B2B SaaS Scale-up</span>
+        </div>
+        <p>Designed a multi-stage n8n workflow connecting LinkedIn, Apollo.io, HubSpot CRM, and Claude API to automate lead enrichment, personalised outreach drafting, and CRM record updates — reducing SDR admin by an estimated 6 hours per rep per week.</p>
+        <div class="tags">
+          <span class="tag">#n8n</span>
+          <span class="tag">#ClaudeAPI</span>
+          <span class="tag">#HubSpot</span>
+          <span class="tag">#Apollo</span>
+          <span class="tag">#Automation</span>
+        </div>
+        <p class="project-outcome">Pipeline contribution from outbound sequences increased 2.4× in the first quarter post-launch.</p>
+      </article>
+
+      <article class="project-card">
+        <div class="project-header">
+          <h3>GCP CCAI Deployment &amp; Dialogflow CX</h3>
+          <span class="project-type">Retail Enterprise</span>
+        </div>
+        <p>Implemented Google CCAI with Dialogflow CX for a high-volume e-commerce contact centre — covering order status, returns automation, and agent assist. Integrated with Genesys Cloud via Google CCAI Connector and BigQuery for interaction analytics.</p>
+        <div class="tags">
+          <span class="tag">#GCP</span>
+          <span class="tag">#DialogflowCX</span>
+          <span class="tag">#AgentAssist</span>
+          <span class="tag">#BigQuery</span>
+          <span class="tag">#GenesysCloud</span>
+        </div>
+        <p class="project-outcome">Self-service containment rate reached 48%; agent assist reduced average handle time by 22%.</p>
+      </article>
+
+      <article class="project-card">
+        <div class="project-header">
+          <h3>WFM Optimisation &amp; Forecasting</h3>
+          <span class="project-type">Utilities / Energy</span>
+        </div>
+        <p>Overhauled workforce management for a 600-seat utility contact centre — rebuilt forecasting models, introduced intraday reforecasting, and designed a skills-based scheduling framework. Delivered training and documentation for the internal WFM team.</p>
+        <div class="tags">
+          <span class="tag">#WFM</span>
+          <span class="tag">#Forecasting</span>
+          <span class="tag">#GenesysWFM</span>
+          <span class="tag">#Scheduling</span>
+        </div>
+        <p class="project-outcome">Shrinkage reduced by 9 percentage points; service level target achieved consistently for first time in 18 months.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ ABOUT ══════════════════════════════════ -->
+<section id="about" aria-labelledby="about-title">
+  <div class="container">
+    <div class="about-grid">
+
+      <div class="about-bio">
+        <p class="section-label">About</p>
+        <h2 class="section-title" id="about-title">The <span>Architect</span> Behind the Work</h2>
+        <div class="divider-line"></div>
+
+        <p>I'm <strong>Stephan Taljaard</strong>, a Contact Centre &amp; AI Solutions Architect based in <strong>Prague, Czech Republic</strong>. With over a decade of experience in enterprise CCaaS environments, I specialise in the intersection of intelligent automation, cloud architecture, and human-centred contact centre design.</p>
+
+        <p>My work spans <strong>Genesys Cloud platform engineering</strong>, production AI deployments using large language models and voice synthesis, and cloud-native architectures on <strong>Google Cloud Platform</strong>. I've delivered projects for clients across financial services, telecommunications, retail, and utilities — from 50-seat SME contact centres to 1,500-seat enterprise deployments.</p>
+
+        <p>I'm particularly focused on practical AI integration: not AI for its own sake, but <strong>AI that measurably improves customer experience</strong>, agent productivity, and operational efficiency. I bridge the gap between cutting-edge language model capabilities and the real-world constraints of contact centre operations.</p>
+
+        <p>When I'm not architecting platforms, I'm building automation workflows, contributing to the n8n community, and exploring what the next generation of voice AI will enable for enterprise customer service. <strong>[PLACEHOLDER: Add a personal touch or hobby here.]</strong></p>
+
+        <div class="about-stats">
+          <div class="stat">
+            <div class="stat-number">[X]+</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">[X]+</div>
+            <div class="stat-label">Projects Delivered</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">[X]+</div>
+            <div class="stat-label">Countries Served</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-sidebar">
+        <h3>Core Technology Stack</h3>
+        <div class="tech-grid">
+
+          <!-- Genesys -->
+          <div class="tech-item">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="20" cy="20" r="18" stroke="#00C9B1" stroke-width="1.5"/>
+              <path d="M12 20c0-4.4 3.6-8 8-8v4c-2.2 0-4 1.8-4 4s1.8 4 4 4h4v-4h-4v-4h8v12H20c-4.4 0-8-3.6-8-8z" fill="#00C9B1"/>
+            </svg>
+            Genesys Cloud
+          </div>
+
+          <!-- GCP -->
+          <div class="tech-item">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M20 8l10 5.8v11.4L20 31 10 25.2V13.8L20 8z" stroke="#F5A623" stroke-width="1.5" fill="none"/>
+              <circle cx="20" cy="19.5" r="4" stroke="#00C9B1" stroke-width="1.5"/>
+              <line x1="20" y1="8" x2="20" y2="15.5" stroke="#F5A623" stroke-width="1.2"/>
+              <line x1="20" y1="23.5" x2="20" y2="31" stroke="#F5A623" stroke-width="1.2"/>
+              <line x1="10" y1="13.8" x2="16.5" y2="17.5" stroke="#F5A623" stroke-width="1.2"/>
+              <line x1="23.5" y1="21.5" x2="30" y2="25.2" stroke="#F5A623" stroke-width="1.2"/>
+              <line x1="30" y1="13.8" x2="23.5" y2="17.5" stroke="#F5A623" stroke-width="1.2"/>
+              <line x1="16.5" y1="21.5" x2="10" y2="25.2" stroke="#F5A623" stroke-width="1.2"/>
+            </svg>
+            GCP
+          </div>
+
+          <!-- Claude / Anthropic -->
+          <div class="tech-item">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M20 6C12.3 6 6 12.3 6 20s6.3 14 14 14 14-6.3 14-14S27.7 6 20 6zm0 4l5 10H15l5-10zm-6 13h12l-2 5H16l-2-5z" fill="#CC785C" opacity="0.85"/>
+            </svg>
+            Claude API
+          </div>
+
+          <!-- n8n -->
+          <div class="tech-item">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="6" y="14" width="8" height="12" rx="4" stroke="#F5A623" stroke-width="1.5"/>
+              <rect x="26" y="14" width="8" height="12" rx="4" stroke="#F5A623" stroke-width="1.5"/>
+              <line x1="14" y1="20" x2="26" y2="20" stroke="#00C9B1" stroke-width="1.5"/>
+              <circle cx="20" cy="20" r="3" fill="#00C9B1" opacity="0.7"/>
+            </svg>
+            n8n
+          </div>
+
+          <!-- ElevenLabs -->
+          <div class="tech-item">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="9" y="10" width="4" height="20" rx="2" fill="#00C9B1"/>
+              <rect x="18" y="6" width="4" height="28" rx="2" fill="#00C9B1" opacity="0.7"/>
+              <rect x="27" y="13" width="4" height="14" rx="2" fill="#00C9B1" opacity="0.5"/>
+            </svg>
+            ElevenLabs
+          </div>
+
+          <!-- Dialogflow -->
+          <div class="tech-item">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M8 12h24v16a4 4 0 0 1-4 4H12a4 4 0 0 1-4-4V12z" stroke="#4285F4" stroke-width="1.5"/>
+              <path d="M8 12l12-6 12 6" stroke="#4285F4" stroke-width="1.5"/>
+              <circle cx="15" cy="22" r="2" fill="#4285F4" opacity="0.7"/>
+              <circle cx="20" cy="22" r="2" fill="#4285F4" opacity="0.7"/>
+              <circle cx="25" cy="22" r="2" fill="#4285F4" opacity="0.7"/>
+            </svg>
+            Dialogflow CX
+          </div>
+
+          <!-- SpeechMiner -->
+          <div class="tech-item">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="20" cy="20" r="12" stroke="#00C9B1" stroke-width="1.5"/>
+              <path d="M14 20 Q17 14 20 20 Q23 26 26 20" stroke="#F5A623" stroke-width="1.75" fill="none" stroke-linecap="round"/>
+            </svg>
+            SpeechMiner
+          </div>
+
+          <!-- BigQuery -->
+          <div class="tech-item">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <ellipse cx="20" cy="14" rx="12" ry="5" stroke="#4285F4" stroke-width="1.5"/>
+              <path d="M8 14v6c0 2.8 5.4 5 12 5s12-2.2 12-5v-6" stroke="#4285F4" stroke-width="1.5"/>
+              <path d="M8 20v6c0 2.8 5.4 5 12 5s12-2.2 12-5v-6" stroke="#4285F4" stroke-width="1.5" opacity="0.5"/>
+            </svg>
+            BigQuery
+          </div>
+
+          <!-- WFM -->
+          <div class="tech-item">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="8" y="10" width="24" height="22" rx="3" stroke="#F5A623" stroke-width="1.5"/>
+              <line x1="8" y1="17" x2="32" y2="17" stroke="#F5A623" stroke-width="1.2"/>
+              <line x1="14" y1="7" x2="14" y2="13" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
+              <line x1="26" y1="7" x2="26" y2="13" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
+              <rect x="13" y="21" width="5" height="4" rx="1" fill="#00C9B1" opacity="0.7"/>
+              <rect x="22" y="21" width="5" height="4" rx="1" fill="#00C9B1" opacity="0.5"/>
+            </svg>
+            WFM
+          </div>
+
+        </div>
+
+        <h3>Certifications &amp; Qualifications</h3>
+        <ul class="cert-list">
+          <li><span class="cert-dot"></span>[PLACEHOLDER: Genesys Cloud Certified Professional – CX Architect]</li>
+          <li><span class="cert-dot"></span>[PLACEHOLDER: Google Cloud Associate Cloud Engineer]</li>
+          <li><span class="cert-dot"></span>[PLACEHOLDER: Google Cloud Professional Data Engineer]</li>
+          <li><span class="cert-dot"></span>[PLACEHOLDER: Additional certification or qualification]</li>
+          <li><span class="cert-dot"></span>[PLACEHOLDER: Additional certification or qualification]</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ CONTACT ════════════════════════════════ -->
+<section id="contact" aria-labelledby="contact-title">
+  <div class="container">
+    <div class="contact-inner">
+      <p class="section-label">Get In Touch</p>
+      <h2 class="section-title" id="contact-title">Ready to <span>Transform</span><br>Your Contact Centre?</h2>
+      <div class="divider-line" style="margin-inline: auto;"></div>
+      <p>Whether you're planning a CCaaS migration, evaluating AI voice capabilities, or looking for a senior technical partner to drive a complex implementation — I'd like to hear about it.</p>
+
+      <div class="contact-actions">
+        <a href="https://www.linkedin.com/in/[YOUR_LINKEDIN_HANDLE]" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          Connect on LinkedIn
+        </a>
+        <a href="mailto:hello@[PLACEHOLDER_DOMAIN].com" class="btn btn-outline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Send an Email
+        </a>
+      </div>
+
+      <div class="contact-meta">
+        <a href="mailto:hello@[PLACEHOLDER_DOMAIN].com" class="contact-meta-item">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          hello@[PLACEHOLDER_DOMAIN].com
+        </a>
+        <span class="contact-meta-item" style="cursor: default;">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Prague, Czech Republic
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ FOOTER ═════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <p style="font-size:0.8rem; color: var(--grey);">© 2025 Stephan Taljaard. All rights reserved.</p>
+      <p class="footer-mono">Prague, Czech Republic &nbsp;·&nbsp; Available for remote &amp; on-site engagements</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════ JS ══════════════════════════════════════ -->
+<script>
+(function () {
+  'use strict';
+
+  /* ── Nav scroll effect ── */
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 20);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ── Active nav link ── */
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id);
+        });
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => observer.observe(s));
+
+  /* ── Hamburger ── */
+  const hamburger = document.querySelector('.hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', open);
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  /* ── Hero Canvas: node-graph animation ── */
+  const canvas = document.getElementById('hero-canvas');
+  const ctx = canvas.getContext('2d');
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) { canvas.style.display = 'none'; return; }
+
+  let W, H, nodes, raf;
+  const NODE_COUNT = 55;
+  const MAX_DIST = 160;
+  const TEAL = '0,201,177';
+  const AMBER = '245,166,35';
+
+  function resize() {
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  function initNodes() {
+    nodes = Array.from({ length: NODE_COUNT }, () => ({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.35,
+      vy: (Math.random() - 0.5) * 0.35,
+      r: Math.random() * 1.8 + 0.8,
+      amber: Math.random() < 0.12
+    }));
+  }
+
+  let mouseX = W / 2, mouseY = H / 2;
+  canvas.addEventListener('mousemove', e => {
+    const rect = canvas.getBoundingClientRect();
+    mouseX = e.clientX - rect.left;
+    mouseY = e.clientY - rect.top;
+  });
+
+  let scrollY = 0;
+  window.addEventListener('scroll', () => { scrollY = window.scrollY; }, { passive: true });
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    const parallaxY = scrollY * 0.08;
+
+    nodes.forEach(n => {
+      n.x += n.vx;
+      n.y += n.vy;
+      if (n.x < 0 || n.x > W) n.vx *= -1;
+      if (n.y < 0 || n.y > H) n.vy *= -1;
+    });
+
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const a = nodes[i], b = nodes[j];
+        const dx = a.x - b.x, dy = (a.y - parallaxY) - (b.y - parallaxY);
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < MAX_DIST) {
+          const alpha = (1 - dist / MAX_DIST) * 0.25;
+          const color = a.amber || b.amber ? AMBER : TEAL;
+          ctx.strokeStyle = `rgba(${color},${alpha})`;
+          ctx.lineWidth = 0.8;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y - parallaxY);
+          ctx.lineTo(b.x, b.y - parallaxY);
+          ctx.stroke();
+        }
+      }
+    }
+
+    nodes.forEach(n => {
+      const dx = n.x - mouseX, dy = (n.y - parallaxY) - mouseY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const glow = dist < 100 ? 0.9 : 0.45;
+      const color = n.amber ? AMBER : TEAL;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y - parallaxY, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${color},${glow})`;
+      ctx.fill();
+    });
+
+    raf = requestAnimationFrame(draw);
+  }
+
+  resize();
+  initNodes();
+  draw();
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      resize();
+      initNodes();
+    }, 150);
+  });
+})();
+</script>
+</body>
+</html>
