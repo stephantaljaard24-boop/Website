@@ -101,7 +101,7 @@ function callOpenRouter(userMessages) {
         'Content-Type':  'application/json',
         'Content-Length': Buffer.byteLength(payload),
         'HTTP-Referer':   'http://13.49.78.105',
-        'X-Title':        'Stephan Taljaard – Digital Twin'
+        'X-Title':        'Stephan Taljaard - Digital Twin'
       }
     };
 
