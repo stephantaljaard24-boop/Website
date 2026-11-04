@@ -1671,21 +1671,11 @@
     setTyping(true);
 
     try {
-      const request = url => fetch(url, {
+      const res = await fetch('/api/chat', {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
         body:    JSON.stringify({ messages: history })
       });
-
-      // Same-origin Pages Function first; temporary fallback to the old Worker
-      // (remove the fallback once /api/chat is confirmed working in production).
-      let res;
-      try {
-        res = await request('/api/chat');
-        if (res.status === 404 || res.status === 500) throw new Error('fallback');
-      } catch (e) {
-        res = await request('https://digital-twin.stephantaljaard24.workers.dev');
-      }
 
       const data = await res.json();
 
