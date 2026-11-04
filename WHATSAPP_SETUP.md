@@ -1,5 +1,11 @@
 # WhatsApp + Digital Twin — setup checklist
 
+> **Status (Nov 2026):** the bot works on Meta's test number, but the public WhatsApp button points to the
+> WhatsApp Business app number (manual replies), because the app and the Cloud API can't share one number without a
+> Meta partner. The webhook code stays deployed and dormant. To switch the bot on later: get a second number
+> (not on any WhatsApp app), add it to a real WhatsApp Business Account, update `WHATSAPP_PHONE_ID` and
+> `WHATSAPP_TOKEN` (permanent System User token), then point the website button at that number.
+
 Webhook URL: `https://stephantaljaard.com/api/whatsapp`
 
 The code is already in the repo. `website` is a Cloudflare **Workers** project (`wrangler.jsonc`, static site in `public/`, API in `src/`). These are the one-time steps you do in Cloudflare, Resend and Meta.

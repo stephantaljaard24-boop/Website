@@ -66,6 +66,8 @@ async function handleEcho(env, echo) {
 
 export async function processPayload(env, payload) {
   const { incoming, echoes } = extractEvents(payload);
+  // Counts only — no phone numbers or message text in logs.
+  console.log(`WhatsApp webhook: ${incoming.length} message(s), ${echoes.length} echo(es)`);
   for (const e of echoes) {
     try { await handleEcho(env, e); } catch (err) { console.error('echo error:', err.message); }
   }

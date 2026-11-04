@@ -19,7 +19,10 @@ export async function onRequestPost({ request, env, waitUntil }) {
   const raw = await request.text();
 
   const ok = await verifySignature(raw, request.headers.get('X-Hub-Signature-256'), env.WHATSAPP_APP_SECRET);
-  if (!ok) return new Response('Invalid signature', { status: 401 });
+  if (!ok) {
+    console.warn('WhatsApp webhook rejected: invalid or missing signature (check WHATSAPP_APP_SECRET)');
+    return new Response('Invalid signature', { status: 401 });
+  }
 
   let payload;
   try {
