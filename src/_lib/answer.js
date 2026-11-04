@@ -1,8 +1,8 @@
 import { buildSystemPrompt } from './prompt.js';
 
-// Free OpenRouter model by default. To move to the paid variant later, set a
-// MODEL environment variable (e.g. "openai/gpt-oss-120b") — no code change needed.
-export const DEFAULT_MODEL = 'openai/gpt-oss-120b:free';
+// OpenRouter retired the free variant, so the default is the paid slug. Override with a
+// MODEL environment variable if you want a different model (no code change needed).
+export const DEFAULT_MODEL = 'openai/gpt-oss-120b';
 
 const MAX_MESSAGES = 20;
 const MAX_CHARS = 2000;

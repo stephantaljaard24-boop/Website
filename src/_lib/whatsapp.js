@@ -1,7 +1,7 @@
 // Helpers for the WhatsApp Cloud API webhook. Kept separate from the route file
 // so they can be unit-tested.
 
-const GRAPH_VERSION = 'v21.0';
+const GRAPH_VERSION = 'v25.0';
 export const HISTORY_TURNS = 10;          // user+assistant pairs kept per customer
 export const HISTORY_TTL = 60 * 60 * 24;  // 24h (matches the WhatsApp service window)
 export const PAUSE_TTL = 60 * 60 * 12;    // bot stays silent 12h after Stephan replies manually
