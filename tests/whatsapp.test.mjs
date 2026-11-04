@@ -3,12 +3,12 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createHmac } from 'node:crypto';
 
-import { onRequestGet, onRequestPost } from '../functions/api/whatsapp.js';
-import { onRequestPost as chatPost } from '../functions/api/chat.js';
-import { sanitizeMessages } from '../functions/_lib/answer.js';
-import { buildSystemPrompt } from '../functions/_lib/prompt.js';
-import { extractEvents, verifySignature, toWhatsAppText, isLead } from '../functions/_lib/whatsapp.js';
-import { processPayload } from '../functions/_lib/webhook.js';
+import { onRequestGet, onRequestPost } from '../src/api/whatsapp.js';
+import { onRequestPost as chatPost } from '../src/api/chat.js';
+import { sanitizeMessages } from '../src/_lib/answer.js';
+import { buildSystemPrompt } from '../src/_lib/prompt.js';
+import { extractEvents, verifySignature, toWhatsAppText, isLead } from '../src/_lib/whatsapp.js';
+import { processPayload } from '../src/_lib/webhook.js';
 
 class FakeKV {
   constructor() { this.m = new Map(); }
