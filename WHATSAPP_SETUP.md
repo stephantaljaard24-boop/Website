@@ -51,8 +51,7 @@ number and scan a QR code from the app. Keep the app updated and used regularly.
 "WhatsApp Business app coexistence" docs for requirements and limits before starting.
 
 ## 7. Website button
-In `index.html`, search for `WHATSAPP_NUMBER` and replace it with your number in international format, digits only
-(e.g. `420123456789`).
+The button in `index.html` already uses `27760451158` (international format, digits only).
 
 ## 8. Test
 1. Message your number from another phone: *"What certifications do you have?"* → bot replies.
