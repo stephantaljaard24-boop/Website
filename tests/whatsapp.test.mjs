@@ -180,6 +180,17 @@ test('web prompt has personal info, WhatsApp prompt does not', () => {
   assert.doesNotMatch(buildSystemPrompt('whatsapp'), /hiking|Married/);
 });
 
+test('prompts forbid absolutes, promises and disclose AI nature on both channels', () => {
+  for (const ch of ['web', 'whatsapp']) {
+    const p = buildSystemPrompt(ch);
+    assert.match(p, /Avoid absolute wording/);
+    assert.match(p, /Never promise anything on Stephan's behalf/);
+    assert.match(p, /AI digital twin/);
+    assert.match(p, /Dialogflow CX/);
+    assert.match(p, /call, meeting or callback/);
+  }
+});
+
 test('helpers', () => {
   assert.equal(isLead('How much does it cost?'), true);
   assert.equal(isLead('Which certifications do you have?'), false);
