@@ -1,3 +1,8 @@
 .env
 .wrangler/
 node_modules/
+
+# Never commit private keys or secrets
+*.pem
+*.key
+.dev.vars
