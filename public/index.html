@@ -1406,7 +1406,7 @@
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <p style="font-size:0.8rem; color: var(--grey);">© 2025 Stephan Taljaard. All rights reserved.</p>
+      <p style="font-size:0.8rem; color: var(--grey);">© <span id="footer-year">2026</span> Stephan Taljaard. All rights reserved.</p>
       <p class="footer-mono">Brno, Czech Republic &nbsp;·&nbsp; Available for remote &amp; on-site engagements &nbsp;·&nbsp; <a href="/privacy.html">Privacy</a></p>
     </div>
   </div>
@@ -1696,6 +1696,10 @@
       input.focus();
     }
   }
+
+  // Keep the footer copyright year current.
+  const yr = document.getElementById('footer-year');
+  if (yr) yr.textContent = new Date().getFullYear();
 
   send.addEventListener('click', sendMessage);
 
