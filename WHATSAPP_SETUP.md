@@ -7,8 +7,7 @@ Meta's UI changes often — if a menu name differs, follow Meta's current docs.
 
 ## 1. Cloudflare: KV namespace
 1. Cloudflare dashboard → **Storage & Databases → KV → Create** a namespace named `digital-twin-chat`.
-2. Copy the namespace **ID** (shown on the KV page). It goes into `wrangler.jsonc` as the `CHAT_KV` binding —
-   send it to Claude, or edit the file yourself (see the TODO in it). Do not add the binding in the dashboard:
+2. The namespace ID is already in `wrangler.jsonc` as the `CHAT_KV` binding. Do not add the binding in the dashboard:
    the repo's `wrangler.jsonc` is the source of truth and dashboard bindings are replaced on deploy.
 
 ## 2. Resend (lead alerts by email)

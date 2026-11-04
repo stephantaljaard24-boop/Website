@@ -9,7 +9,7 @@
   },
   "observability": { "enabled": true },
   // Keep any variables you set in the Cloudflare dashboard when deploying.
-  "keep_vars": true
-  // TODO: add the KV binding once we have the namespace ID:
-  // "kv_namespaces": [{ "binding": "CHAT_KV", "id": "<namespace id>" }]
+  "keep_vars": true,
+  // Chat history, webhook de-duplication, rate limits and bot pause flags.
+  "kv_namespaces": [{ "binding": "CHAT_KV", "id": "7d89282718f84ae09aa783edb9f3fadd" }]
 }
