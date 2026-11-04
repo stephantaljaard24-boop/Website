@@ -187,6 +187,7 @@ test('prompts forbid absolutes, promises and disclose AI nature on both channels
     assert.match(p, /Never promise anything on Stephan's behalf/);
     assert.match(p, /AI digital twin/);
     assert.match(p, /Dialogflow CX/);
+    assert.match(p, /call, meeting or callback/);
   }
 });
 
