@@ -1382,6 +1382,11 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           Send an Email
         </a>
+        <!-- TODO: replace WHATSAPP_NUMBER with your number in international format, digits only (e.g. 420123456789) -->
+        <a href="https://wa.me/WHATSAPP_NUMBER?text=Hi%20Stephan%2C%20I%20found%20your%20website" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.6-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg>
+          Chat on WhatsApp
+        </a>
       </div>
 
       <div class="contact-meta">
@@ -1667,11 +1672,21 @@
     setTyping(true);
 
     try {
-      const res = await fetch('https://digital-twin.stephantaljaard24.workers.dev', {
+      const request = url => fetch(url, {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
         body:    JSON.stringify({ messages: history })
       });
+
+      // Same-origin Pages Function first; temporary fallback to the old Worker
+      // (remove the fallback once /api/chat is confirmed working in production).
+      let res;
+      try {
+        res = await request('/api/chat');
+        if (res.status === 404 || res.status === 500) throw new Error('fallback');
+      } catch (e) {
+        res = await request('https://digital-twin.stephantaljaard24.workers.dev');
+      }
 
       const data = await res.json();
 
