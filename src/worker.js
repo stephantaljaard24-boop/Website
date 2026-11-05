@@ -2,10 +2,12 @@
 // only /api/* requests reach this code (see "run_worker_first" in wrangler.jsonc).
 import * as chat from './api/chat.js';
 import * as whatsapp from './api/whatsapp.js';
+import * as telegram from './api/telegram.js';
 
 const ROUTES = {
   '/api/chat': { OPTIONS: chat.onRequestOptions, POST: chat.onRequestPost },
-  '/api/whatsapp': { GET: whatsapp.onRequestGet, POST: whatsapp.onRequestPost }
+  '/api/whatsapp': { GET: whatsapp.onRequestGet, POST: whatsapp.onRequestPost },
+  '/api/telegram': { POST: telegram.onRequestPost }
 };
 
 export default {
