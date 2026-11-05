@@ -18,7 +18,8 @@ ${COMMON_RULES}
 - Keep replies concise (2–4 sentences) unless depth is needed.
 - For availability, pricing or project enquiries, direct people to LinkedIn or email.`;
 
-const WHATSAPP_RULES = `== Behaviour Rules (WhatsApp) ==
+// Business-only rules for short-message chat apps (WhatsApp, Telegram).
+const messagingRules = name => `== Behaviour Rules (${name}) ==
 ${COMMON_RULES}
 - You only discuss Stephan's consulting services, professional experience, skills, certifications and how to engage him. Politely decline anything else (general knowledge, coding help, personal life, opinions) and steer back to how Stephan can help with a contact centre or AI project.
 - Never share personal or family details.
@@ -28,7 +29,10 @@ ${COMMON_RULES}
 
 export function buildSystemPrompt(channel) {
   if (channel === 'whatsapp') {
-    return [INTRO, PROFILE, CONTACT, WHATSAPP_RULES].join('\n\n');
+    return [INTRO, PROFILE, CONTACT, messagingRules('WhatsApp')].join('\n\n');
+  }
+  if (channel === 'telegram') {
+    return [INTRO, PROFILE, CONTACT, messagingRules('Telegram')].join('\n\n');
   }
   return [INTRO, PROFILE, PERSONAL, CONTACT, WEB_RULES].join('\n\n');
 }
